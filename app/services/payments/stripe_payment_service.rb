@@ -1,10 +1,7 @@
 module Payments
   class StripePaymentService < PaymentService
-    require "stripe"
-
     def initialize
-      super(Rails.application.credentials.stripe_api_key)
-      Stripe.api_key = @service_api_key
+      super(StripeClient.new)
     end
 
     # def create_payment_process
@@ -14,5 +11,12 @@ module Payments
     # def get_customer_orders
     #   raise NotImplementedError
     # end
+
+    def fetch_and_serialize_products
+      prices = @payment_client.get_all_prices
+      products = @payment_client.get_all_products
+
+      @payment_client.serializer.call(prices: prices, products: products)
+    end
   end
 end

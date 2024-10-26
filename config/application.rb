@@ -38,5 +38,8 @@ module StripeCheckout
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use sidekiq as Active Job adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

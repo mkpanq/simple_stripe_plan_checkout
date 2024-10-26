@@ -4,12 +4,13 @@
       Hello <%= current_user.username.split.first %> !
     </p>
     <div class="flex flex-row justify-between gap-3">
+      <%= button_to "Refresh Bundles", refresh_bundles_path,  { class: 'px-5 py-3 mx-auto border border-0.5 rounded-xl'} %>
       <%= button_to "My Orders", '',  { disabled: true, class: 'inactive bg-gray-100 px-5 py-3 mx-auto border border-0.5 rounded-xl'} %>
       <%= button_to "Log out", logout_path,  { method: :delete, class: 'px-5 py-3 mx-auto border border-0.5 shadow-md rounded-xl'} %>
     </div>
   </div>
 
-<%# TODO: Refactor this and divide into separate partials %>
+  <%# TODO: Refactor this and divide into separate partials %>
   <div class="flex flex-row justify-around">
     <% @dashboard_data[:active_bundles].each do |bundle| %>
       <div class="border border-0.5 w-96 h-[500px] rounded-xl shadow-lg py-10 px-6 text-center space-y-20">
@@ -18,7 +19,8 @@
           <p class="text-xl leading-loose"><%= bundle.description %></p>
         </div>
         <div  class="space-y-10 text-2xl ">
-          <p class="font-semibold"><%= recurring_price_name(bundle) %></p>
+
+          <p class="font-semibold"><%= price_name(bundle.price, bundle.currency) %></p>
           <%# TODO: Refactor this button as separate configurable partial component %>
           <%= button_to "Buy", '',  { method: :post, class: 'px-20 py-5 mx-auto border border-0.5 border-lime-500 shadow-md rounded-xl bg-lime-100'} %>
         </div>

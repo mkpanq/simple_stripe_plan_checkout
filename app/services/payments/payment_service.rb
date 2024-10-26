@@ -1,7 +1,7 @@
 module Payments
   class PaymentService
-    def initialize(api_key = nil)
-      @service_api_key = api_key
+    def initialize(payment_client)
+      @payment_client = payment_client
     end
 
     def create_payment_process
@@ -9,6 +9,10 @@ module Payments
     end
 
     def get_customer_orders
+      raise NotImplementedError
+    end
+
+    def fetch_and_serialize_products
       raise NotImplementedError
     end
 

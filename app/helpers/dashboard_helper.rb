@@ -1,13 +1,7 @@
 module DashboardHelper
-  def recurring_price_name(bundle)
-    "#{number_to_currency(bundle.price, unit: convert_currency_name_to_symbol[bundle.currency])} / #{bundle.recurring_type}"
-  end
+  require "money"
 
-  def convert_currency_name_to_symbol
-    {
-      "USD" => "$",
-      "EUR" => "€",
-      "PLN" => "zł"
-    }
+  def price_name(price, currency)
+    Money.from_cents(price, currency).format
   end
 end

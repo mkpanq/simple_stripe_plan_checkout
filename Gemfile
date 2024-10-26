@@ -12,9 +12,11 @@ gem "bcrypt", "~> 3.1.20"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "stripe", "~> 13.0.2"
+# TODO: Remember to add redis in docker-compose !
+gem "sidekiq", "~> 7.3.4"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "byebug"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
 end
@@ -24,3 +26,5 @@ group :development do
 end
 
 gem "tailwindcss-rails", "~> 3.0"
+
+gem "money", "~> 6.19"

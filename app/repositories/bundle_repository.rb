@@ -6,4 +6,8 @@ class BundleRepository
   def get_active
     Bundle.where(active: true)
   end
+
+  def save_to_db(bundles)
+    Bundle.upsert_all(bundles, unique_by: :bundle_id)
+  end
 end
