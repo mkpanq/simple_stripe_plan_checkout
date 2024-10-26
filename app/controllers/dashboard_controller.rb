@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  # TODO: Handle errors!
+
   def home
     @dashboard_data = dashboard_data_service.get_dashboard_data
   end

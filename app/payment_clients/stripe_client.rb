@@ -5,7 +5,6 @@ class StripeClient
 
   def initialize
     Stripe.api_key = Rails.application.credentials.stripe_api_key
-    @serializer = StripeBundleSerializer
   end
 
   def get_all_prices
