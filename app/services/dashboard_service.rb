@@ -2,6 +2,7 @@ class DashboardService
   # TODO: Should we do it more generative ?
   def initialize
     @bundle_repository = BundleRepository.new
+    # Here we'll have payment service choice
   end
 
   def get_dashboard_data
