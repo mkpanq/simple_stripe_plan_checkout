@@ -5,9 +5,9 @@ module Payments
       @serializer = StripeBundleSerializer
     end
 
-    # def create_payment_process
-    #   raise NotImplementedError
-    # end
+    def create_payment_process(bundle_id, user_email)
+      @payment_client.generate_checkout_session(bundle_id, user_email)
+    end
 
     # def get_customer_orders
     #   raise NotImplementedError

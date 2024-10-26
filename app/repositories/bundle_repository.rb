@@ -4,7 +4,7 @@ class BundleRepository
   end
 
   def get_active
-    Bundle.where(active: true)
+    Bundle.where(active: true).sort_by(&:price)
   end
 
   def save_to_db(bundles)
