@@ -1,7 +1,8 @@
 module Payments
   class PaymentService
-    def initialize(payment_client)
+    def initialize(payment_client, products_serializer)
       @payment_client = payment_client
+      @serializer = products_serializer
     end
 
     def create_payment_process
@@ -16,8 +17,8 @@ module Payments
       raise NotImplementedError
     end
 
-    # create session
-    # get orders
-    # other related to webhooks
+    def fullfill_order
+      raise NotImplementedError
+    end
   end
 end

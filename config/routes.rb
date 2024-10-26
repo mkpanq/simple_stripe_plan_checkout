@@ -12,5 +12,8 @@ Rails.application.routes.draw do
   # Dashboard controller
   get "/" => "dashboard#home", as: :root
   post "/refresh_bundles" => "dashboard#refresh_bundles", as: :refresh_bundles
-  post "/checkout" => "dashboard#get_checkout", as: :checkout
+
+  # Checkout controller
+  post "/checkout" => "checkout#get_checkout", as: :checkout
+  post "/checkout_status" => "checkout#checkout_status"
 end

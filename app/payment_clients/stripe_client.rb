@@ -1,8 +1,6 @@
 class StripeClient
   require "stripe"
 
-  attr_reader :serializer
-
   def initialize
     Stripe.api_key = Rails.application.credentials.stripe_api_key
   end
@@ -32,5 +30,19 @@ class StripeClient
         cancel_url: "http://localhost:3000/"
       }
     )
+  end
+
+  def retrieve_checkout_session(session_id)
+    Stripe::Checkout::Session.retrieve({
+        id: session_id,
+        expand: [ "line_items" ]
+      })
+  end
+
+  def construct_webhook_event(payload, sig_header)
+    secret = "whsec_e8f1c51d0376d77dfab0b22347a1d1aa6a67e16d87211984a6c12081b086d4a3"
+    # secret = Rails.application.credentials.stripe_webhook_secret
+
+    Stripe::Webhook.construct_event(payload, sig_header, secret)
   end
 end

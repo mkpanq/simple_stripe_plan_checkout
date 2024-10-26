@@ -11,10 +11,6 @@ class DashboardService
     }
   end
 
-  def get_bundle_checkout(bundle_id:, user_email:)
-    @payment_service.create_payment_process(bundle_id, user_email)
-  end
-
   def refresh_bundles
     BundleSyncJob.perform_later(payment_service_class: @payment_service.class.name, bundle_repository_class: @bundle_repository.class.name)
   end
