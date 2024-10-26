@@ -1,0 +1,25 @@
+source "https://rubygems.org"
+
+gem "rails", "~> 7.2.1", ">= 7.2.1.2"
+gem "sprockets-rails"
+gem "pg", "~> 1.5.9"
+gem "puma", ">= 6.4.3"
+gem "importmap-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "jbuilder"
+gem "bcrypt", "~> 3.1.20"
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "bootsnap", require: false
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "brakeman", require: false
+  gem "rubocop-rails-omakase", require: false
+end
+
+group :development do
+  gem "web-console"
+end
+
+gem "tailwindcss-rails", "~> 3.0"
