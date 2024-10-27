@@ -42,6 +42,7 @@ class StripeClient
 
   def construct_webhook_event(payload, sig_header)
     secret = "whsec_e8f1c51d0376d77dfab0b22347a1d1aa6a67e16d87211984a6c12081b086d4a3"
+    # Normally, we obtain secret by Rails credentials, but this is for local use only
     # secret = Rails.application.credentials.stripe_webhook_secret
 
     Stripe::Webhook.construct_event(payload, sig_header, secret)

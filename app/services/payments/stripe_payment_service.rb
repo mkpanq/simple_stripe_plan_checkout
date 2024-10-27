@@ -20,6 +20,10 @@ module Payments
       raise CustomErrors::SignatureError
     end
 
+    def retrieve_checkout_session_by_id(checkout_session_id)
+      @payment_client.retrieve_checkout_session(checkout_session_id)
+    end
+
     def retrieve_checkout_session_from_event(event)
       checkout_session_id = event["data"]["object"]["id"]
       session = @payment_client.retrieve_checkout_session(checkout_session_id)

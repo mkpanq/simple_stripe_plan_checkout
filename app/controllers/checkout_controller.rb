@@ -3,8 +3,14 @@ class CheckoutController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :checkout_status ]
   skip_before_action :authorize, only: [ :checkout_status ]
 
-  def get_checkout
-    session = checkout_service.get_bundle_checkout(bundle_id: params[:bundle_id], user_email: current_user.email)
+  def create_new_checkout_session
+    session = checkout_service.create_new_checkout_session(bundle_id: params[:bundle_id], user_email: current_user.email)
+
+    redirect_to session.url, status: 303, allow_other_host: true
+  end
+
+  def continue_existing_checkout_session
+    session = checkout_service.get_existing_checkout_session(params[:session_id])
 
     redirect_to session.url, status: 303, allow_other_host: true
   end

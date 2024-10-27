@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   post "/refresh_bundles" => "dashboard#refresh_bundles", as: :refresh_bundles
 
   # Checkout controller
-  post "/checkout" => "checkout#get_checkout", as: :checkout
-  post "/checkout_status" => "checkout#checkout_status"
+  post "/checkout_new" => "checkout#create_new_checkout_session", as: :checkout_new
+  post "/checkout_continue" => "checkout#continue_existing_checkout_session", as: :checkout_continue
+  post "/checkout_status" => "checkout#checkout_status", as: :checkout_status
   get "/success" => "checkout#success_status", as: :success
   get "/cancel" => "checkout#cancel_status", as: :cancel
 

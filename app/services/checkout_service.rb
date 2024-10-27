@@ -7,11 +7,17 @@ class CheckoutService
     @order_service = order_service
   end
 
-  def get_bundle_checkout(bundle_id:, user_email:)
+  def create_new_checkout_session(bundle_id:, user_email:)
     process = @payment_service.create_payment_process(bundle_id, user_email)
     @order_service.create_new_order(process.id, bundle_id, user_email)
 
     process
+  end
+
+  def get_existing_checkout_session(session_id)
+    session = @payment_service.retrieve_checkout_session_by_id(session_id)
+
+    session
   end
 
   def get_bundle_data_from_session_id(session_id)
