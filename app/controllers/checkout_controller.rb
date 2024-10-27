@@ -24,7 +24,7 @@ class CheckoutController < ApplicationController
 
   def checkout_service
     @checkout_service ||= CheckoutService.new(
-      payment_service: Payments::StripePaymentService.new
-      )
+      payment_service: Payments::StripePaymentService.new,
+      order_service: OrdersService.new)
   end
 end

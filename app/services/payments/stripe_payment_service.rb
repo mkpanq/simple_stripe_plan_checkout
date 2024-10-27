@@ -20,39 +20,12 @@ module Payments
       raise CustomErrors::SignatureError
     end
 
-    def fullfill_order(event)
+    def retrieve_checkout_session_from_event(event)
       checkout_session_id = event["data"]["object"]["id"]
+      session = @payment_client.retrieve_checkout_session(checkout_session_id)
+      raise CustomErrors::CheckoutSessionNotFound if session.nil?
 
-      # Security - we need to find session id in our database first - what if somebody just shoots us random data ?
-      # TODO: Be sure this runs only once - check at "order / payment" object if has
-      # "fullfilement date
-
-      checkout_session = @payment_client.retrieve_checkout_session(checkout_session_id)
-
-
-      if checkout_session.payment_status != "unpaid"
-        # TODO: Perform fulfillment of the line items
-        # TODO: Record/save fulfillment status for this
-        # TODO: Save order in database
-        # TODO: Send user an email
-        # Checkout Session
-        puts "----------------"
-        puts "----------------"
-        puts "----------------"
-        puts "OK: Fulfilling order from session: #{payment_session_id}"
-        puts "----------------"
-        puts "----------------"
-        puts "----------------"
-      else
-        # TODO: Handle error or do something else - need to be 100 % sure about payment_status
-        puts "----------------"
-        puts "----------------"
-        puts "----------------"
-        puts "ERROR Fulfilling order from session: #{payment_session_id}"
-        puts "----------------"
-        puts "----------------"
-        puts "----------------"
-      end
+      session
     end
 
     # def get_customer_orders
