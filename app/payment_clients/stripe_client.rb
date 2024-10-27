@@ -27,8 +27,6 @@ class StripeClient
         ],
         mode: "subscription",
         customer_email: user_email,
-
-        # TODO:
         success_url: SUCCESS_URL,
         cancel_url: CANCEL_URL
       }

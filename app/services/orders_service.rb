@@ -5,6 +5,10 @@ class OrdersService
     @bundle_repository = bundle_repository
   end
 
+  def get_all_for_current_user(id)
+    @order_repository.find_by_user_id(id)
+  end
+
   def create_new_order(payment_session_id, bundle_id, user_email)
     user_id = @user_repository.find_by_user_email(user_email).id
     bundle = @bundle_repository.find_by_bundle_id(bundle_id)

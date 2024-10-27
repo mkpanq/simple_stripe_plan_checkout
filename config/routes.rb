@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   post "/checkout_status" => "checkout#checkout_status"
   get "/success" => "checkout#success_status", as: :success
   get "/cancel" => "checkout#cancel_status", as: :cancel
+
+  # Orders controller
+  get "/orders" => "orders#index", as: :orders
 end

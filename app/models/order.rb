@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  belongs_to :bundle
+
   enum payment_status: {
     unpaid: "unpaid",
     paid: "paid"

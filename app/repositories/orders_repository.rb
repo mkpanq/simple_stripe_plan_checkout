@@ -7,6 +7,10 @@ class OrdersRepository
     )
   end
 
+  def find_by_user_id(user_id)
+    Order.where(user_id: user_id).includes(:bundle)
+  end
+
   def find_by_payment_session_id(payment_session_id)
     Order.find_by(payment_session_id: payment_session_id)
   end

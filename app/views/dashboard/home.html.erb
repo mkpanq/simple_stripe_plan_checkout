@@ -5,7 +5,7 @@
     </p>
     <div class="flex flex-row justify-between gap-3">
       <%= button_to "Refresh Bundles", refresh_bundles_path,  { class: 'px-5 py-3 mx-auto border border-0.5 rounded-xl'} %>
-      <%= button_to "My Orders", '',  { disabled: true, class: 'inactive bg-gray-100 px-5 py-3 mx-auto border border-0.5 rounded-xl'} %>
+      <%= button_to "My Orders", orders_path,  { method: :get, class: 'px-5 py-3 mx-auto border border-0.5 rounded-xl'} %>
       <%= button_to "Log out", logout_path,  { method: :delete, class: 'px-5 py-3 mx-auto border border-0.5 shadow-md rounded-xl'} %>
     </div>
   </div>
