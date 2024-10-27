@@ -1,6 +1,7 @@
 class StripeClient
   require "stripe"
 
+  # Should be constructed from main URL, but for now I just hardcoded it
   SUCCESS_URL = "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}"
   CANCEL_URL = "http://localhost:3000/cancel?session_id={CHECKOUT_SESSION_ID}"
 

@@ -49,13 +49,17 @@ class CheckoutService
 
   def failed_order(order)
     @order_service.order_expired(order)
-    # Send Email
     raise CustomErrors::OrderExpired
   end
 
   def fullfill_order(order)
     @order_service.fullfill_order(order)
-    # Send email
+    # TODO: More generic mailer service
+    CheckoutMailer.with(
+      order: order,
+      user: order.user,
+      bundle: order.bundle
+    ).success_email.deliver_later
   end
 
   def success_event?(event)
