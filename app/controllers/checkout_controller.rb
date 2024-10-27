@@ -10,10 +10,14 @@ class CheckoutController < ApplicationController
   end
 
   def checkout_status
-    checkout_service.proceed_checkout_event_status(request: request)
-
-    # Normal returns 204, need to return 200, or 400 if somethings wrong
     # TODO: Based on this - checkout will redirect to success or cancel url
+    checkout_service.proceed_checkout_event_status(request: request)
+  rescue CustomErrors::PayloadError => e
+    render json: { error: e.message }, status: e.status
+  rescue CustomErrors::SignatureError
+    render json: { error: e.message }, status: e.status
+  rescue StandardError => e
+    render json: { error: e.message }, status: :internal_server_error
   end
 
   private
