@@ -1,12 +1,18 @@
 class OrdersService
-  def initialize(order_repository:, user_repository:)
+  def initialize(order_repository:, user_repository:, bundle_repository:)
     @order_repository = order_repository
     @user_repository = user_repository
+    @bundle_repository = bundle_repository
   end
 
   def create_new_order(payment_session_id, bundle_id, user_email)
     user_id = @user_repository.find_by_user_email(user_email).id
-    @order_repository.create_new_order(payment_session_id, bundle_id, user_id)
+    bundle = @bundle_repository.find_by_bundle_id(bundle_id)
+    @order_repository.create_new_order(payment_session_id, bundle.id, user_id)
+  end
+
+  def get_bundle_from_order(order)
+    @bundle_repository.find(order.bundle_id)
   end
 
   def find_by_payment_session_id(payment_session_id)

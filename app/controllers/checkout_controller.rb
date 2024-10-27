@@ -13,24 +13,34 @@ class CheckoutController < ApplicationController
     checkout_service.proceed_checkout_event_status(request: request)
 
     head :ok
-  rescue StandardError => e
-    handle_checkout_status_error(e)
+  rescue => error
+    render json: { error: error.message }, status: error.try(:status) || 500
+  end
+
+  def success_status
+    @bundle_data = get_bundle_data_from_session
+  end
+
+  def cancel_status
+    @bundle_data = get_bundle_data_from_session
   end
 
   private
 
-  def handle_checkout_status_error(error)
-    if error.module_parent_name == "CustomErrors"
-      render json: { error: error.message }, status: error.status
-    else
-      render json: { error: error.message }, status: :internal_server_error
-    end
+  def get_bundle_data_from_session
+    session_id = params[:session_id]
+
+    checkout_service.get_bundle_data_from_session_id(session_id)
   end
 
   def checkout_service
     @checkout_service ||= CheckoutService.new(
       payment_service: Payments::StripePaymentService.new,
-      order_service: OrdersService.new
+      order_service: OrdersService.new(
+        order_repository: OrdersRepository.new,
+        user_repository: UserRepository.new,
+        bundle_repository: BundleRepository.new
+      )
     )
   end
 end

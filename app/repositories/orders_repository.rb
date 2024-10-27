@@ -16,7 +16,7 @@ class OrdersRepository
   end
 
   def order_expired?(order)
-    order.status == statuses[:expired]
+    order.status == Order.statuses[:expired]
   end
 
   def set_fullfill_date(order)
@@ -24,14 +24,14 @@ class OrdersRepository
   end
 
   def close_payment(order)
-    order.update!(payment_status: payment_statuses[:paid])
+    order.update!(payment_status: Order.payment_statuses[:paid])
   end
 
   def close_order_status(order)
-    order.update!(status: statuses[:closed])
+    order.update!(status: Order.statuses[:complete])
   end
 
   def set_order_expire(order)
-    order.update!(status: statuses[:expired])
+    order.update!(status: Order.statuses[:expired])
   end
 end

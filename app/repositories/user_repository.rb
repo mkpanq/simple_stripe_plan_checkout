@@ -1,5 +1,5 @@
 class UserRepository
-  def find_by_user_email
+  def find_by_user_email(user_email)
     User.find_by(email: user_email)
   end
 end

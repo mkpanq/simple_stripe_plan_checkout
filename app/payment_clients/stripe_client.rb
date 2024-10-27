@@ -1,6 +1,9 @@
 class StripeClient
   require "stripe"
 
+  SUCCESS_URL = "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}"
+  CANCEL_URL = "http://localhost:3000/cancel?session_id={CHECKOUT_SESSION_ID}"
+
   def initialize
     Stripe.api_key = Rails.application.credentials.stripe_api_key
   end
@@ -26,8 +29,8 @@ class StripeClient
         customer_email: user_email,
 
         # TODO:
-        success_url: "http://localhost:3000/",
-        cancel_url: "http://localhost:3000/"
+        success_url: SUCCESS_URL,
+        cancel_url: CANCEL_URL
       }
     )
   end

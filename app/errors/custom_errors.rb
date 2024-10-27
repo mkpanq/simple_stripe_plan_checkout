@@ -52,4 +52,13 @@ module CustomErrors
       @status = :not_found
     end
   end
+
+  class UnhandeledEvent < StandardError
+    attr_reader :status
+
+    def initialize
+      super("Unhandeled event")
+      @status = :bad_request
+    end
+  end
 end

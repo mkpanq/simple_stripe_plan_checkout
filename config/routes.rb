@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   # Checkout controller
   post "/checkout" => "checkout#get_checkout", as: :checkout
   post "/checkout_status" => "checkout#checkout_status"
+  get "/success" => "checkout#success_status", as: :success
+  get "/cancel" => "checkout#cancel_status", as: :cancel
 end

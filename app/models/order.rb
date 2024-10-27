@@ -1,7 +1,4 @@
 class Order < ApplicationRecord
-  has_one :bundle
-  has_one :user
-
   enum payment_status: {
     unpaid: "unpaid",
     paid: "paid"
@@ -9,7 +6,7 @@ class Order < ApplicationRecord
 
   enum status: {
     open: "open",
-    closed: "closed",
+    complete: "complete",
     expired: "expired"
   }
 end
