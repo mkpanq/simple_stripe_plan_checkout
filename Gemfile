@@ -12,7 +12,6 @@ gem "bcrypt", "~> 3.1.20"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "stripe", "~> 13.0.2"
-# TODO: Remember to add redis in docker-compose !
 gem "sidekiq", "~> 7.3.4"
 
 group :development, :test do
