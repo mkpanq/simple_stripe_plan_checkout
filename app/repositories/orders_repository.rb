@@ -11,6 +11,14 @@ class OrdersRepository
     Order.find_by(payment_session_id: payment_session_id)
   end
 
+  def order_fullfill?(order)
+    order.fulfillment_date.present?
+  end
+
+  def order_expired?(order)
+    order.status == statuses[:expired]
+  end
+
   def set_fullfill_date(order)
     order.update!(fulfillment_date: Time.now)
   end

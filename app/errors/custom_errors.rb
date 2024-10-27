@@ -35,21 +35,21 @@ module CustomErrors
     end
   end
 
+  class OrderExpired < StandardError
+    attr_reader :status
+
+    def initialize
+      super("Order Expired")
+      @status = :bad_request
+    end
+  end
+
   class CheckoutSessionNotFound < StandardError
     attr_reader :status
 
     def initialize
       super("Checkout session not found")
       @status = :not_found
-    end
-  end
-
-  class SessionAlreadyCompleted < StandardError
-    attr_reader :status
-
-    def initialize
-      super("Session already completed")
-      @status = :bad_request
     end
   end
 end

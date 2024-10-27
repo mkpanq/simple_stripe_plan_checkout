@@ -13,9 +13,10 @@ class OrdersService
     @order_repository.find_by_payment_session_id(payment_session_id)
   end
 
-  def verify_order_fullfillment(order)
+  def verify_order(order)
     raise CustomErrors::OrderNotFound if order.nil?
-    raise CustomErrors::OrderAlreadyFulfilled if order.fulfillment_date.present?
+    raise CustomErrors::OrderExpired if @order_repository.order_expired?(order)
+    raise CustomErrors::OrderAlreadyFulfilled if @order_repository.order_fullfill?(order)
   end
 
   def fullfill_order(order)

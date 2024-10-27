@@ -10,21 +10,27 @@ class CheckoutController < ApplicationController
   end
 
   def checkout_status
-    # TODO: Based on this - checkout will redirect to success or cancel url
     checkout_service.proceed_checkout_event_status(request: request)
-  rescue CustomErrors::PayloadError => e
-    render json: { error: e.message }, status: e.status
-  rescue CustomErrors::SignatureError
-    render json: { error: e.message }, status: e.status
+
+    head :ok
   rescue StandardError => e
-    render json: { error: e.message }, status: :internal_server_error
+    handle_checkout_status_error(e)
   end
 
   private
 
+  def handle_checkout_status_error(error)
+    if error.module_parent_name == "CustomErrors"
+      render json: { error: error.message }, status: error.status
+    else
+      render json: { error: error.message }, status: :internal_server_error
+    end
+  end
+
   def checkout_service
     @checkout_service ||= CheckoutService.new(
       payment_service: Payments::StripePaymentService.new,
-      order_service: OrdersService.new)
+      order_service: OrdersService.new
+    )
   end
 end
