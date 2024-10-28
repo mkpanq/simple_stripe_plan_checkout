@@ -25,6 +25,12 @@ services:
         bundle exec rails server -b 0.0.0.0
       "
 
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
   stripe-listener:
     image: stripe/stripe-cli
     command: listen --forward-to app:3000/checkout_status --api-key ${STRIPE_API_TOKEN}
