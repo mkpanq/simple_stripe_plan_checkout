@@ -11,7 +11,7 @@ gem "jbuilder"
 gem "bcrypt", "~> 3.1.20"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
-gem "stripe", "~> 13.0.2"
+gem "stripe", "~> 13.1.2"
 gem "sidekiq", "~> 7.3.4"
 
 group :development, :test do
