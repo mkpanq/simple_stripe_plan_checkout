@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 7.2.1", ">= 7.2.1.2"
+gem "rails", "~> 8.0.0"
 gem "sprockets-rails"
 gem "pg", "~> 1.5.9"
 gem "puma", ">= 6.4.3"
