@@ -12,7 +12,7 @@ gem "bcrypt", "~> 3.1.20"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "stripe", "~> 13.0.2"
-gem "sidekiq", "~> 7.3.4"
+gem "sidekiq", "~> 7.3.7"
 
 group :development, :test do
   gem "byebug", "~> 11.1.3"
